@@ -1,0 +1,149 @@
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/GeneralSans-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Brand purple: sampled directly from the real MS Digital Prime icon mark
+     (public/assets/logo-mark.png, cropped from the client-provided
+     logo-full.png). Dominant fill color across 94k+ opaque pixels was
+     #591BAA, occurring far more than any other tone. Locked as ground truth. */
+  --accent: #591baa;
+  /* Vivid register of the same hue, used for text/icons/large numbers where
+     the darker --accent itself would read as flat rather than energetic. */
+  --accent-soft: #7d4be9;
+  /* Desaturated + slightly darkened accent-soft: secondary-tier numbers/labels
+     that should read as "on-brand but secondary" next to a saturated headline figure. */
+  --accent-muted: #7456b5;
+  --accent-dim: #b3a0dd;
+  --selection-bg: #ecd9fa;
+  /* Solid-purple-block sections (NarrativeTransition, FinalCta): near-white
+     text tuned to stay >=4.5:1 on --accent even for normal-size body copy. */
+  --on-accent-muted: #f6f2fe;
+  /* De-emphasized state for large display text on --accent (>=3:1, the
+     WCAG large-text minimum); used only at 24px+ sizes. */
+  --on-accent-dim: #d8c9f8;
+
+  /* Soft Structuralism (high-end-visual-design, Section 3.A): silver/white
+     background, hierarchy comes from shadow depth, not from stepped tint. */
+  --bg: #f7f7f9;
+  --surface: #ffffff;
+  --border: rgba(23, 18, 32, 0.06);
+  --border-strong: rgba(23, 18, 32, 0.12);
+
+  --text: #171220;
+  --text-muted: #5c516b;
+  --text-faint: #6b6079;
+
+  /* Layered, low-opacity, neutral-tinted shadows: a tight contact shadow for
+     grounding plus a large diffused ambient one for the "floating" read.
+     No harsh single-layer rgba(0,0,0,X) blobs. */
+  --shadow-xs: 0 1px 2px rgba(23, 18, 32, 0.05);
+  --shadow-sm: 0 1px 3px rgba(23, 18, 32, 0.04), 0 10px 24px -12px rgba(23, 18, 32, 0.1);
+  --shadow-md: 0 2px 6px rgba(23, 18, 32, 0.04), 0 24px 48px -20px rgba(23, 18, 32, 0.14);
+  --shadow-lg: 0 4px 10px rgba(23, 18, 32, 0.04), 0 48px 90px -28px rgba(23, 18, 32, 0.18);
+  --shadow-hover: 0 8px 20px rgba(23, 18, 32, 0.06), 0 32px 64px -20px rgba(23, 18, 32, 0.2);
+
+  --radius-lg: 28px;
+  --radius-md: 16px;
+  --radius-full: 9999px;
+
+  --font-display: 'Clash Display', 'General Sans', system-ui, sans-serif;
+  --font-body: 'General Sans', system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--selection-bg);
+    color: var(--text);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
