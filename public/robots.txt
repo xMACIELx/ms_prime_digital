@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://msdigitalprime.com.br/sitemap.xml
