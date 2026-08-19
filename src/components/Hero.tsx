@@ -1,7 +1,17 @@
 import { motion } from 'motion/react'
-import { ArrowRight } from '@phosphor-icons/react'
+import { ArrowRight, Check } from '@phosphor-icons/react'
 import { contact } from '../data/stats'
 import HeroVisual from './HeroVisual'
+
+const checklist = [
+  'Site profissional',
+  'Google Ads',
+  'Meta Ads',
+  'WhatsApp integrado',
+  'Acompanhamento de resultados',
+  'Automações',
+  'Desenvolvimento de sistemas',
+]
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -26,9 +36,9 @@ export default function Hero() {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="max-w-[18ch] font-display text-[clamp(34px,5.4vw,58px)] font-semibold leading-[1.05] tracking-tight"
+            className="max-w-[22ch] font-display text-[clamp(28px,3.9vw,44px)] font-semibold leading-[1.1] tracking-tight"
           >
-            Marketing e automação para vender mais
+            Faça sua empresa receber mais clientes pelo Google e Instagram
           </motion.h1>
 
           <motion.p
@@ -36,18 +46,35 @@ export default function Hero() {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="mt-6 max-w-[48ch] text-[17px] leading-relaxed text-text-muted"
+            className="mt-5 max-w-[48ch] text-[17px] leading-relaxed text-text-muted"
           >
-            Tráfego, sites e automações trabalhando juntos para atrair, converter e
-            organizar sua operação, sem depender de vários fornecedores soltos.
+            Site, tráfego pago e automação trabalhando juntos, sem depender de
+            vários fornecedores soltos.
           </motion.p>
+
+          <motion.ul
+            custom={1.5}
+            initial="hidden"
+            animate="show"
+            variants={fadeUp}
+            className="mt-6 grid max-w-[46ch] grid-cols-1 gap-x-6 gap-y-2.5 sm:grid-cols-2"
+          >
+            {checklist.map((item) => (
+              <li key={item} className="flex items-center gap-2.5 text-[14px] text-text">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent-soft">
+                  <Check size={11} weight="bold" />
+                </span>
+                {item}
+              </li>
+            ))}
+          </motion.ul>
 
           <motion.div
             custom={2}
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="mt-9 flex flex-wrap items-center gap-4"
+            className="mt-8 flex flex-wrap items-center gap-4"
           >
             <a
               href={contact.whatsapp}
@@ -77,7 +104,9 @@ export default function Hero() {
           className="lg:col-span-5"
         >
           <div className="rounded-[var(--radius-lg)] bg-surface p-2 shadow-lg">
-            <HeroVisual />
+            {/* PROTOTYPE: variant="A" (no source data) vs variant="B" (placeholder
+                social-proof slot) — pending your call, see chat for both renders. */}
+            <HeroVisual variant="A" />
           </div>
         </motion.div>
       </div>

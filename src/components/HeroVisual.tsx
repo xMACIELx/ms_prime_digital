@@ -5,17 +5,27 @@ import { Target, Browser, UsersFour, Sparkle } from '@phosphor-icons/react'
 interface Node {
   id: string
   label: string
-  icon: typeof Target
+  icon?: typeof Target
+  iconSrc?: string
   x: number
   y: number
 }
 
-const nodes: Node[] = [
+const baseNodes: Node[] = [
   { id: 'trafego', label: 'Tráfego', icon: Target, x: 30, y: 14 },
   { id: 'site', label: 'Site', icon: Browser, x: 75, y: 19 },
   { id: 'crm', label: 'CRM', icon: UsersFour, x: 21, y: 76 },
   { id: 'ia', label: 'IA', icon: Sparkle, x: 76, y: 79 },
 ]
+
+// PROTOTYPE (Option A only): 5th node for "Automações", real n8n mark.
+const automationNode: Node = {
+  id: 'automacoes',
+  label: 'Automações',
+  iconSrc: '/assets/n8n-icon.svg',
+  x: 12,
+  y: 48,
+}
 
 const center = { x: 48, y: 47 }
 
@@ -84,8 +94,15 @@ function Connector({ d, delay, duration, animateDot }: ConnectorProps) {
   )
 }
 
-export default function HeroVisual() {
+interface HeroVisualProps {
+  /** PROTOTYPE ONLY: lets us render both hub options side by side for
+   * comparison. Remove this prop once one option is picked. */
+  variant?: 'A' | 'B'
+}
+
+export default function HeroVisual({ variant = 'A' }: HeroVisualProps) {
   const reduceMotion = useReducedMotion()
+  const nodes = variant === 'A' ? [...baseNodes, automationNode] : baseNodes
 
   return (
     <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[calc(var(--radius-lg)-8px)] bg-surface shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] bg-[radial-gradient(ellipse_120%_75%_at_50%_0%,rgba(125,75,233,0.3),transparent_65%)]">
@@ -105,25 +122,26 @@ export default function HeroVisual() {
         ))}
       </svg>
 
-      {nodes.map((node, i) => {
-        const Icon = node.icon
-        return (
-          <motion.div
-            key={node.id}
-            style={{ left: `${node.x}%`, top: `${node.y}%` }}
-            className="absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full bg-surface px-3.5 py-2.5 shadow-md"
-            animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
-            transition={{ duration: 5 + i * 0.4, ease: 'easeInOut', repeat: Infinity, delay: i * 0.3 }}
-          >
-            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent-soft">
-              <Icon size={13} weight="light" />
-            </span>
-            <span className="whitespace-nowrap text-[12px] font-medium text-text">
-              {node.label}
-            </span>
-          </motion.div>
-        )
-      })}
+      {nodes.map((node, i) => (
+        <motion.div
+          key={node.id}
+          style={{ left: `${node.x}%`, top: `${node.y}%` }}
+          className="absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full bg-surface px-3.5 py-2.5 shadow-md"
+          animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
+          transition={{ duration: 5 + i * 0.4, ease: 'easeInOut', repeat: Infinity, delay: i * 0.3 }}
+        >
+          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent-soft">
+            {node.iconSrc ? (
+              <img src={node.iconSrc} alt="" className="h-3 w-3" />
+            ) : node.icon ? (
+              <node.icon size={13} weight="light" />
+            ) : null}
+          </span>
+          <span className="whitespace-nowrap text-[12px] font-medium text-text">
+            {node.label}
+          </span>
+        </motion.div>
+      ))}
 
       <div
         style={{ left: `${center.x}%`, top: `${center.y}%` }}
@@ -131,14 +149,24 @@ export default function HeroVisual() {
       />
       <motion.div
         style={{ left: `${center.x}%`, top: `${center.y}%` }}
-        className="absolute z-20 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 rounded-[var(--radius-md)] bg-surface px-7 py-6 text-center shadow-lg"
+        className="absolute z-20 flex w-[168px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 rounded-[var(--radius-md)] bg-surface px-6 py-6 text-center shadow-lg"
         animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
         transition={{ duration: 6.4, ease: 'easeInOut', repeat: Infinity }}
       >
-        <span className="font-display text-[30px] font-semibold tracking-tight text-accent-soft">
-          +178%
-        </span>
-        <span className="text-[11px] text-text-muted">Crescimento médio</span>
+        {variant === 'A' ? (
+          <span className="font-display text-[19px] font-semibold leading-snug tracking-tight text-accent-soft">
+            Tudo em um só lugar
+          </span>
+        ) : (
+          <>
+            <span className="font-display text-[15px] font-semibold leading-snug tracking-tight text-text">
+              Como ajudamos [Cliente]
+            </span>
+            <span className="mt-2.5 w-full rounded-[10px] border border-dashed border-text-faint/50 py-3 text-[10.5px] leading-snug text-text-faint">
+              Logo ou depoimento real em breve
+            </span>
+          </>
+        )}
       </motion.div>
     </div>
   )
