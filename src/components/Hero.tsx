@@ -36,9 +36,9 @@ export default function Hero() {
             initial="hidden"
             animate="show"
             variants={fadeUp}
-            className="max-w-[22ch] font-display text-[clamp(28px,3.9vw,44px)] font-semibold leading-[1.1] tracking-tight"
+            className="max-w-[18ch] font-display text-[clamp(32px,5vw,54px)] font-semibold leading-[1.08] tracking-tight"
           >
-            Faça sua empresa receber mais clientes pelo Google e Instagram
+            Faça sua empresa receber mais clientes
           </motion.h1>
 
           <motion.p
@@ -48,8 +48,7 @@ export default function Hero() {
             variants={fadeUp}
             className="mt-5 max-w-[48ch] text-[17px] leading-relaxed text-text-muted"
           >
-            Site, tráfego pago e automação trabalhando juntos, sem depender de
-            vários fornecedores soltos.
+            Site, tráfego pago e automação trabalhando juntos pra você vender mais.
           </motion.p>
 
           <motion.ul
@@ -104,9 +103,7 @@ export default function Hero() {
           className="lg:col-span-5"
         >
           <div className="rounded-[var(--radius-lg)] bg-surface p-2 shadow-lg">
-            {/* PROTOTYPE: variant="A" (no source data) vs variant="B" (placeholder
-                social-proof slot) — pending your call, see chat for both renders. */}
-            <HeroVisual variant="A" />
+            <HeroVisual />
           </div>
         </motion.div>
       </div>

@@ -11,21 +11,15 @@ interface Node {
   y: number
 }
 
-const baseNodes: Node[] = [
-  { id: 'trafego', label: 'Tráfego', icon: Target, x: 30, y: 14 },
-  { id: 'site', label: 'Site', icon: Browser, x: 75, y: 19 },
-  { id: 'crm', label: 'CRM', icon: UsersFour, x: 21, y: 76 },
-  { id: 'ia', label: 'IA', icon: Sparkle, x: 76, y: 79 },
+// 5-point star around the center card. Pulled up/out from a pure pentagon so
+// the two "upper" points clear the card's bounding box instead of grazing it.
+const nodes: Node[] = [
+  { id: 'trafego', label: 'Tráfego', icon: Target, x: 48, y: 16 },
+  { id: 'site', label: 'Site', icon: Browser, x: 78, y: 30 },
+  { id: 'ia', label: 'IA', icon: Sparkle, x: 70, y: 72 },
+  { id: 'crm', label: 'CRM', icon: UsersFour, x: 26, y: 72 },
+  { id: 'automacoes', label: 'Automações', iconSrc: '/assets/n8n-icon.svg', x: 18, y: 30 },
 ]
-
-// PROTOTYPE (Option A only): 5th node for "Automações", real n8n mark.
-const automationNode: Node = {
-  id: 'automacoes',
-  label: 'Automações',
-  iconSrc: '/assets/n8n-icon.svg',
-  x: 12,
-  y: 48,
-}
 
 const center = { x: 48, y: 47 }
 
@@ -94,15 +88,8 @@ function Connector({ d, delay, duration, animateDot }: ConnectorProps) {
   )
 }
 
-interface HeroVisualProps {
-  /** PROTOTYPE ONLY: lets us render both hub options side by side for
-   * comparison. Remove this prop once one option is picked. */
-  variant?: 'A' | 'B'
-}
-
-export default function HeroVisual({ variant = 'A' }: HeroVisualProps) {
+export default function HeroVisual() {
   const reduceMotion = useReducedMotion()
-  const nodes = variant === 'A' ? [...baseNodes, automationNode] : baseNodes
 
   return (
     <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[calc(var(--radius-lg)-8px)] bg-surface shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] bg-[radial-gradient(ellipse_120%_75%_at_50%_0%,rgba(125,75,233,0.3),transparent_65%)]">
@@ -149,24 +136,13 @@ export default function HeroVisual({ variant = 'A' }: HeroVisualProps) {
       />
       <motion.div
         style={{ left: `${center.x}%`, top: `${center.y}%` }}
-        className="absolute z-20 flex w-[168px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 rounded-[var(--radius-md)] bg-surface px-6 py-6 text-center shadow-lg"
+        className="absolute z-20 flex w-[150px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1 rounded-[var(--radius-md)] bg-surface px-5 py-5 text-center shadow-lg"
         animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
         transition={{ duration: 6.4, ease: 'easeInOut', repeat: Infinity }}
       >
-        {variant === 'A' ? (
-          <span className="font-display text-[19px] font-semibold leading-snug tracking-tight text-accent-soft">
-            Tudo em um só lugar
-          </span>
-        ) : (
-          <>
-            <span className="font-display text-[15px] font-semibold leading-snug tracking-tight text-text">
-              Como ajudamos [Cliente]
-            </span>
-            <span className="mt-2.5 w-full rounded-[10px] border border-dashed border-text-faint/50 py-3 text-[10.5px] leading-snug text-text-faint">
-              Logo ou depoimento real em breve
-            </span>
-          </>
-        )}
+        <span className="font-display text-[19px] font-semibold leading-snug tracking-tight text-accent-soft">
+          Tudo em um só lugar
+        </span>
       </motion.div>
     </div>
   )
