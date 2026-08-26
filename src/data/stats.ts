@@ -35,7 +35,6 @@ export const processSteps = [
 ]
 
 export const contact = {
-  whatsapp: 'https://wa.me/555197993631',
   whatsappLabel: 'Falar no WhatsApp',
   instagram: 'https://instagram.com/ms_digitalprime',
   instagramHandle: '@ms_digitalprime',

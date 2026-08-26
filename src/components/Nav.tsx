@@ -1,10 +1,13 @@
+import { Link } from 'react-router-dom'
 import { contact } from '../data/stats'
+import { WHATSAPP_MESSAGES, buildWhatsappHref } from '../lib/whatsapp'
 
-const links = [
+const links: ({ href: string; label: string } | { to: string; label: string })[] = [
   { href: '#servicos', label: 'Serviços' },
   { href: '#processo', label: 'Processo' },
   { href: '#resultados', label: 'Resultados' },
   { href: '#depoimentos', label: 'Depoimentos' },
+  { to: '/site-express', label: 'Site Express' },
 ]
 
 export default function Nav() {
@@ -19,19 +22,29 @@ export default function Nav() {
         </a>
 
         <nav className="hidden items-center gap-7 text-[13.5px] text-text-muted md:flex">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="whitespace-nowrap transition-colors duration-200 hover:text-text"
-            >
-              {link.label}
-            </a>
-          ))}
+          {links.map((link) =>
+            'to' in link ? (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="whitespace-nowrap transition-colors duration-200 hover:text-text"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className="whitespace-nowrap transition-colors duration-200 hover:text-text"
+              >
+                {link.label}
+              </a>
+            ),
+          )}
         </nav>
 
         <a
-          href={contact.whatsapp}
+          href={buildWhatsappHref(WHATSAPP_MESSAGES.generico)}
           target="_blank"
           rel="noopener noreferrer"
           className="shrink-0 whitespace-nowrap rounded-full bg-accent px-5 py-2.5 text-[13px] font-semibold text-white transition-transform duration-200 ease-out hover:-translate-y-0.5 active:scale-[0.98]"

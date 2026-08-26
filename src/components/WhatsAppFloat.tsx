@@ -1,10 +1,17 @@
+import { useLocation } from 'react-router-dom'
 import { WhatsappLogo } from '@phosphor-icons/react'
 import { contact } from '../data/stats'
+import { WHATSAPP_MESSAGES, buildWhatsappHref } from '../lib/whatsapp'
 
 export default function WhatsAppFloat() {
+  const { pathname } = useLocation()
+  const message = pathname.startsWith('/site-express')
+    ? WHATSAPP_MESSAGES.siteExpress
+    : WHATSAPP_MESSAGES.generico
+
   return (
     <a
-      href={contact.whatsapp}
+      href={buildWhatsappHref(message)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={contact.whatsappLabel}

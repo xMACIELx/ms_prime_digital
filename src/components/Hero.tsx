@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { ArrowRight, Check } from '@phosphor-icons/react'
 import { contact } from '../data/stats'
+import { WHATSAPP_MESSAGES, buildWhatsappHref } from '../lib/whatsapp'
 import HeroVisual from './HeroVisual'
 
 const checklist = [
@@ -76,7 +77,7 @@ export default function Hero() {
             className="mt-8 flex flex-wrap items-center gap-4"
           >
             <a
-              href={contact.whatsapp}
+              href={buildWhatsappHref(WHATSAPP_MESSAGES.generico)}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2.5 rounded-full bg-accent px-7 py-4 text-[15px] font-semibold text-white shadow-[0_14px_36px_-10px_rgba(125,75,233,0.6)] transition-transform duration-200 ease-out hover:-translate-y-0.5 active:scale-[0.98]"
