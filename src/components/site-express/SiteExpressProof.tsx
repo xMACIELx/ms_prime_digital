@@ -9,7 +9,7 @@ export default function SiteExpressProof() {
           Sites que já entregamos
         </h2>
 
-        <div className="mt-10 flex flex-wrap gap-6">
+        <div className="mt-10 flex flex-wrap justify-center gap-6">
           {siteExpressPortfolio.map((item, i) => (
             <motion.div
               key={item.nome}

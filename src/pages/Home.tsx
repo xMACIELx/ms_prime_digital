@@ -12,11 +12,13 @@ import SiteExpressTeaser from '../components/SiteExpressTeaser'
 import FinalCta from '../components/FinalCta'
 import Footer from '../components/Footer'
 import WhatsAppFloat from '../components/WhatsAppFloat'
+import MobileSiteExpressBanner from '../components/MobileSiteExpressBanner'
 import { marketingServices, automationServices } from '../data/services'
 import type { Service } from '../data/services'
 
 export default function Home() {
   const [activeService, setActiveService] = useState<Service | null>(null)
+  const [bannerVisible, setBannerVisible] = useState(false)
 
   return (
     <>
@@ -46,7 +48,8 @@ export default function Home() {
         <FinalCta />
       </main>
       <Footer />
-      <WhatsAppFloat />
+      <WhatsAppFloat liftedOnMobile={bannerVisible} />
+      <MobileSiteExpressBanner onVisibleChange={setBannerVisible} />
       <ServiceOverlay service={activeService} onClose={() => setActiveService(null)} />
     </>
   )
