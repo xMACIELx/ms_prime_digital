@@ -15,7 +15,7 @@ export const siteExpressPortfolio: PortfolioItem[] = [
   {
     nome: 'W&W Assessoria',
     setor: 'Cidadania e Franquias',
-    url: 'https://3b71dulryu8lzadapxhzqcx5.179.198.114.86.sslip.io/',
+    url: 'https://franqueado.wewassessoria.com.br/',
     screenshot: '/assets/portfolio/ww-assessoria.jpg',
   },
   {
